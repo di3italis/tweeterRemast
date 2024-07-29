@@ -1,4 +1,5 @@
 from flask import Flask, render_template
+from .models import db
 from .config import Config
 from .tweets import tweets as seed_tweets
 from .routes.tweet_routes import tweets
@@ -7,7 +8,11 @@ import random
 
 app = Flask(__name__)
 
+
 app.config.from_object(Config)
+# connect app to db
+db.init_app(app)
+
 app.register_blueprint(tweets, url_prefix="/tweets")
 
 

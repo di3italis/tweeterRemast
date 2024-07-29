@@ -2,7 +2,7 @@
 from flask import Blueprint, render_template, redirect
 from ..tweets import tweets as seed_tweets
 from ..form.form import Form
-from datetime import date
+from datetime import datetime
 from random import randint
 
 tweets = Blueprint("tweets", __name__)
@@ -27,7 +27,8 @@ def new_tweet():
             "author": form.data["author"],
             "tweet": form.data["tweet"],
             "likes": randint(1, 5_000),
-            "date": date.today(),
+            # "date": date.today(),
+            "date": datetime.now().strftime("%-m/%-d/%y"),
         }
         seed_tweets.append(new_tweet)
         print(new_tweet)
